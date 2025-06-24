@@ -1,44 +1,72 @@
 # Network-Traffic-Analysis_Task
-🧾 Network Traffic Analysis Summary
-Objective: Capture, filter, and analyze network traffic to identify normal vs suspicious behavior.
 
-📷 Captured Screenshots
-HTTP Browsing Activity
+# 🧠 Network Traffic Analysis Report
 
-GET/POST requests to public sites with 200/301 responses
+## 🎯 Objective
+Capture, filter, and analyze network traffic to distinguish between normal behavior and suspicious activity using Wireshark and Nmap.
 
-Screenshot 1: Normal HTTP packet breakdown (Wireshark filter: http)
+---
 
-DNS Query Analysis
+## 📸 Captured Screenshots
 
-Domain resolution for neverssl.com and others
+### 1. SYN Packet Indicative of Port Scanning
+![SYN Scan](images/SYN_Scan.PNG)  
+> Captures a SYN packet with no ACK response, commonly seen in Nmap-style half-open scans. Filtered using `tcp.flags.syn == 1 && tcp.flags.ack == 0`.
 
-Screenshot 2 & 3: DNS request/response with protocol breakdown (filter: dns)
+---
 
-Nmap SYN Scan Activity
+### 2. Legitimate SSH Session Initialization
+![SSH Attempt](images/SYN%20Port22.PNG)  
+> Displays a completed TCP handshake followed by SSHv2 key exchange. Demonstrates how real encrypted sessions appear in contrast to scan attempts.
 
-Half-open connection attempts (Nmap style)
+---
 
-Screenshot 4: tcp.flags.syn == 1 && tcp.flags.ack == 0 revealing SYN flood pattern
+### 3. Malformed or Oversized Packet Detection
+![Malformed Packets](images/Malformed_packets.PNG)  
+> Highlights packets with abnormal size or structure, useful for identifying protocol abuse or potential evasion techniques.
 
-Suspicious SSH Activity
+---
 
-Multiple SYN packets and sudden connection to port 22
+### 4. ICMP Echo Request (Ping) Traffic
+![Ping](images/Ping.PNG)  
+> Shows standard ICMP echo requests and replies, useful as a baseline for comparison against more complex or suspicious traffic.
 
-Screenshot 5: Highlighted packets showing potential probe and session attempt
+---
 
-🧠 Observations
-Normal traffic included DNS lookups and web browsing sessions.
+### 5. Traffic Spike Visualization (IO Graph)
+![Spike Visualization](images/Spike_visualization.PNG)  
+> Wireshark IO Graph showing a burst of SYN packets over time — a visual indicator of scanning or flood behavior.
 
-Anomalous activity was observed in the form of:
+---
 
-Repeated SYN packets (indicative of port scans)
+## 🧠 Observations
 
-Sudden SSH connections (potential brute-force or enumeration attempts)
+- **Normal traffic** included ICMP pings and completed SSH sessions.
+- **Anomalous activity** was observed in the form of:
+  - Half-open SYN packets (indicative of stealth scans)
+  - Malformed packets and traffic spikes
 
-🛡️ Mitigations
-Limit SSH access to known IPs and disable unused ports
+---
 
-Use firewalls to detect and throttle scan behavior
+## 🛡️ Mitigation Recommendations
 
-Monitor DNS and SYN packet surges for reconnaissance detection
+- Restrict SSH access to trusted IPs and enforce key-based authentication.
+- Monitor for SYN floods and malformed packets using IDS tools.
+- Visualize traffic patterns regularly to detect anomalies early.
+
+---
+
+## 📂 Tools Used
+
+- **Wireshark** for packet capture and filtering
+- **Nmap** for generating controlled scan traffic
+- **IO Graphs** for visualizing traffic spikes
+
+---
+
+## ✅ Status
+
+All screenshots are uploaded and documented. This repo is ready for publishing or sharing as a portfolio piece. You can now:
+- Add a short intro at the top about your learning goal
+- Optionally include a `.pcap` file or link to a TryHackMe room if this was part of a challenge
+
