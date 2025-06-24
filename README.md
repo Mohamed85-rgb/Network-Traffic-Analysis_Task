@@ -1,5 +1,3 @@
-# Network-Traffic-Analysis_Task
-
 # 🧠 Network Traffic Analysis Report
 
 ## 🎯 Objective
