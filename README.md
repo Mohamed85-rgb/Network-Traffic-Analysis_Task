@@ -62,9 +62,3 @@ Capture, filter, and analyze network traffic to distinguish between normal behav
 
 ---
 
-## ✅ Status
-
-All screenshots are uploaded and documented. This repo is ready for publishing or sharing as a portfolio piece. You can now:
-- Add a short intro at the top about your learning goal
-- Optionally include a `.pcap` file or link to a TryHackMe room if this was part of a challenge
-
